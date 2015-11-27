@@ -72,14 +72,14 @@ namespace TrafficManager_ImprovedAI
             title.text = "Traffic Manager";
             title.relativePosition = new Vector3(65.0f, 5.0f);
 
-            buttonSwitchTraffic = _createButton("Switch traffic lights", new Vector3(35f, 30f), clickSwitchTraffic);
-            buttonPrioritySigns = _createButton("Add priority signs", new Vector3(35f, 70f), clickAddPrioritySigns);
-            buttonManualControl = _createButton("Manual traffic lights", new Vector3(35f, 110f), clickManualControl);
-            buttonTimedMain = _createButton("Timed traffic lights", new Vector3(35f, 150f), clickTimedAdd);
-            buttonLaneChange = _createButton("Change lanes", new Vector3(35f, 190f), clickChangeLanes);
-            buttonCrosswalk = _createButton("Add/Remove Crosswalk", new Vector3(35f, 230f), clickCrosswalk);
-            buttonClearTraffic = _createButton("Clear Traffic", new Vector3(35f, 270f), clickClearTraffic);
-            buttonToggleDespawn = _createButton(LoadingExtension.Instance.despawnEnabled ? "Disable Despawning" : "Enable Despawning", new Vector3(35f, 310f), clickToggleDespawn);
+            buttonSwitchTraffic = _createButton("信号の付け外し", new Vector3(35f, 30f), clickSwitchTraffic);
+            buttonPrioritySigns = _createButton("優先関係標識の追加", new Vector3(35f, 70f), clickAddPrioritySigns);
+            buttonManualControl = _createButton("信号の手動切替", new Vector3(35f, 110f), clickManualControl);
+            buttonTimedMain = _createButton("信号の時間設定", new Vector3(35f, 150f), clickTimedAdd);
+            buttonLaneChange = _createButton("右左折車線の設定", new Vector3(35f, 190f), clickChangeLanes);
+            buttonCrosswalk = _createButton("横断歩道の付け外し", new Vector3(35f, 230f), clickCrosswalk);
+            buttonClearTraffic = _createButton("移動中の車の除去", new Vector3(35f, 270f), clickClearTraffic);
+            buttonToggleDespawn = _createButton(LoadingExtension.Instance.despawnEnabled ? "スタック除去無効化" : "スタック除去有効化", new Vector3(35f, 310f), clickToggleDespawn);
         }
 
         private UIButton _createButton(string text, Vector3 pos, MouseEventHandler eventClick)
@@ -235,7 +235,7 @@ namespace TrafficManager_ImprovedAI
         private static void clickToggleDespawn(UIComponent component, UIMouseEventParameter eventParam)
         {
             LoadingExtension.Instance.despawnEnabled = !LoadingExtension.Instance.despawnEnabled;
-            buttonToggleDespawn.text = LoadingExtension.Instance.despawnEnabled ? "Disable despawning" : "Enable despawning";
+            buttonToggleDespawn.text = LoadingExtension.Instance.despawnEnabled ? "スタック除去無効化" : "スタック除去有効化";
         }
     }
 }

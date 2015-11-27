@@ -43,7 +43,7 @@ namespace TrafficManager_ImprovedAI
             minLaneSpace.MaxValue = CustomPathFind.MAX_MIN_LANE_SPACE;
             minLaneSpace.StepSize = 0.1f;
             minLaneSpace.Slider.scrollWheelAmount = 0.1f;
-            minLaneSpace.LabelText = "minimum lane space";
+            minLaneSpace.LabelText = "最低車間距離(経路の渋滞判定に使用)";
             minLaneSpace.SliderValue = CustomPathFind.minLaneSpace;
 
             yVal += 56;
@@ -60,7 +60,7 @@ namespace TrafficManager_ImprovedAI
             congestionCostFactor.MaxValue = CustomPathFind.MAX_CONGESTION_COST_FACTOR;
             congestionCostFactor.StepSize = 0.1f;
             congestionCostFactor.Slider.scrollWheelAmount = 0.1f;
-            congestionCostFactor.LabelText = "congestion cost factor";
+            congestionCostFactor.LabelText = "渋滞している経路の距離に掛けるコスト係数";
             congestionCostFactor.SliderValue = CustomPathFind.congestionCostFactor;
 
             yVal += 56;
@@ -77,7 +77,7 @@ namespace TrafficManager_ImprovedAI
             lookaheadLanes.MaxValue = CustomPathFind.MAX_LOOKAHEAD_LANES;
             lookaheadLanes.StepSize = 1;
             lookaheadLanes.Slider.scrollWheelAmount = 1;
-            lookaheadLanes.LabelText = "lookahead lanes";
+            lookaheadLanes.LabelText = "現在経路の混雑度の算出にどのくらい先まで見るか";
             lookaheadLanes.SliderValue = CustomPathFind.lookaheadLanes;
 
             yVal += 56;
@@ -94,14 +94,14 @@ namespace TrafficManager_ImprovedAI
             congestedLaneThreshold.MaxValue = CustomPathFind.MAX_CONGESTED_LANE_THRESHOLD;
             congestedLaneThreshold.StepSize = 1;
             congestedLaneThreshold.Slider.scrollWheelAmount = 1;
-            congestedLaneThreshold.LabelText = "congested lane threshold";
+            congestedLaneThreshold.LabelText = "経路を再検索する混雑度の閾値";
             congestedLaneThreshold.SliderValue = CustomPathFind.congestedLaneThreshold;
 
             yVal += 58;
             obeyTMLaneFlags = this.AddUIComponent<UILabelledBox>();
             obeyTMLaneFlags.Parent = this;
             obeyTMLaneFlags.relativePosition = new Vector3(0, yVal);
-            obeyTMLaneFlags.LabelText = "obey traffic manager lane flags";
+            obeyTMLaneFlags.LabelText = "Traffic Managerの車線設定に従い経路検索する";
             obeyTMLaneFlags.CheckBox.isChecked = CustomPathFind.obeyTMLaneFlags;
             obeyTMLaneFlags.CheckBox.eventCheckChanged += delegate(UIComponent component, bool value) {
                 while (!Monitor.TryEnter(obeyTMLaneFlags, SimulationManager.SYNCHRONIZE_TIMEOUT)) {
@@ -111,7 +111,7 @@ namespace TrafficManager_ImprovedAI
             };
 
             resetButton = this.AddUIComponent<UIButton>();
-            resetButton.text = "reset";
+            resetButton.text = "リセット";
             resetButton.width = 57;
             resetButton.height = 33;
             resetButton.normalBgSprite = "ButtonMenu";

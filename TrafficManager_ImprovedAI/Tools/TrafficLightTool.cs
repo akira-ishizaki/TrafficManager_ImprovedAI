@@ -666,7 +666,7 @@ namespace TrafficManager_ImprovedAI
                             }
                             else
                             {
-                                ShowToolInfo(true, "Node should not be a traffic light", node.m_position);
+                                ShowToolInfo(true, "信号のない交差点を選択してください", node.m_position);
                             }
                         }
                         else if (toolMode == ToolMode.ManualSwitch)
@@ -698,7 +698,7 @@ namespace TrafficManager_ImprovedAI
                                     }
                                     else
                                     {
-                                        ShowToolInfo(true, "Node is not a traffic light", node.m_position);
+                                        ShowToolInfo(true, "信号のある交差点を選択してください", node.m_position);
                                     }
                                 }
                                 else
@@ -707,7 +707,7 @@ namespace TrafficManager_ImprovedAI
                                     {
                                         
                                     }
-                                    ShowToolInfo(true, "Node is part of timed script", node.m_position);
+                                    ShowToolInfo(true, "この信号は時間設定がされています", node.m_position);
                                 }
                             }
                         }
@@ -728,7 +728,7 @@ namespace TrafficManager_ImprovedAI
                                 }
                                 else
                                 {
-                                    ShowToolInfo(true, "Node is not a traffic light", node.m_position);
+                                    ShowToolInfo(true, "信号のある交差点を選択してください", node.m_position);
                                 }
                             }
                             else
@@ -742,7 +742,7 @@ namespace TrafficManager_ImprovedAI
                                 }
                                 else
                                 {
-                                    ShowToolInfo(true, "Node is part of timed script", node.m_position);
+                                    ShowToolInfo(true, "この信号は時間設定がされています", node.m_position);
                                 }
                             }
                         }
@@ -1544,7 +1544,7 @@ namespace TrafficManager_ImprovedAI
 
         protected void _guiTimedTrafficLights()
         {
-            GUILayout.Window(253, _windowRect, _guiTimedControlPanel, "Timed traffic lights manager");
+            GUILayout.Window(253, _windowRect, _guiTimedControlPanel, "信号の時間設定");
 
             if (_windowRect.Contains(Event.current.mousePosition))
             {
@@ -2612,7 +2612,7 @@ namespace TrafficManager_ImprovedAI
                 laneTitleStyle.normal.textColor = new Color(1f, 1f, 1f);
 
                 GUILayout.BeginVertical(laneStyle);
-                GUILayout.Label("Lane " + (i + 1), laneTitleStyle);
+                GUILayout.Label("車線 " + (i + 1), laneTitleStyle);
                     GUILayout.BeginVertical();
                         GUILayout.BeginHorizontal();
                         if (GUILayout.Button("←", ((flags & NetLane.Flags.Left) == NetLane.Flags.Left ? style1 : style2), new GUILayoutOption[2] { GUILayout.Width(35), GUILayout.Height(25) }))
@@ -3156,7 +3156,7 @@ namespace TrafficManager_ImprovedAI
 
         protected void _guiTimedTrafficLightsNode()
         {
-            GUILayout.Window(252, _windowRect2, _guiTimedTrafficLightsNodeWindow, "Select nodes");
+            GUILayout.Window(252, _windowRect2, _guiTimedTrafficLightsNodeWindow, "交差点の選択");
 
             if (_windowRect2.Contains(Event.current.mousePosition))
             {
@@ -3172,7 +3172,7 @@ namespace TrafficManager_ImprovedAI
         {
             if (SelectedNodeIndexes.Count < 1)
             {
-                GUILayout.Label("Select nodes");
+                GUILayout.Label("交差点を選択してください");
             }
             else
             {
@@ -3180,12 +3180,12 @@ namespace TrafficManager_ImprovedAI
 
                 for (var i = 0; i < SelectedNodeIndexes.Count; i++)
                 {
-                    txt += "Node " + SelectedNodeIndexes[i] + "\n";
+                    txt += "交差点 " + SelectedNodeIndexes[i] + "\n";
                 }
 
                 GUILayout.Label(txt);
 
-                if(GUILayout.Button("Next"))
+                if(GUILayout.Button("次へ"))
                 {
                     for (var i = 0; i < SelectedNodeIndexes.Count; i++)
                     {
@@ -3237,10 +3237,10 @@ namespace TrafficManager_ImprovedAI
                         {
                             GUILayout.BeginVertical();
                             GUILayout.Space(5);
-                            GUILayout.Label("State[" + (i + 1) + "]: " + timedNodeMain.GetStep(i).currentStep(), layout_green);
+                            GUILayout.Label("状態[" + (i + 1) + "]: " + timedNodeMain.GetStep(i).currentStep(), layout_green);
                             GUILayout.Space(5);
                             GUILayout.EndVertical();
-                            if (GUILayout.Button("Skip", GUILayout.Width(45)))
+                            if (GUILayout.Button("スキップ", GUILayout.Width(90)))
                             {
                                 for (var j = 0; j < SelectedNodeIndexes.Count; j++)
                                 {
@@ -3251,12 +3251,12 @@ namespace TrafficManager_ImprovedAI
                         }
                         else
                         {
-                            GUILayout.Label("State " + (i + 1) + ": " + timedNodeMain.GetStep(i).numSteps, layout);
+                            GUILayout.Label("状態 " + (i + 1) + ": " + timedNodeMain.GetStep(i).numSteps, layout);
                         }
                     }
                     else
                     {
-                        GUILayout.Label("State " + (i + 1) + ": " + timedNodeMain.GetStep(i).numSteps);
+                        GUILayout.Label("状態 " + (i + 1) + ": " + timedNodeMain.GetStep(i).numSteps);
 
                         if (timedEditStep < 0)
                         {
@@ -3264,7 +3264,7 @@ namespace TrafficManager_ImprovedAI
 
                             if (i > 0)
                             {
-                                if (GUILayout.Button("up", GUILayout.Width(45)))
+                                if (GUILayout.Button("上へ", GUILayout.Width(45)))
                                 {
                                     for (var j = 0; j < SelectedNodeIndexes.Count; j++)
                                     {
@@ -3280,7 +3280,7 @@ namespace TrafficManager_ImprovedAI
 
                             if (i < timedNodeMain.NumSteps() - 1)
                             {
-                                if (GUILayout.Button("down", GUILayout.Width(45)))
+                                if (GUILayout.Button("下へ", GUILayout.Width(45)))
                                 {
                                     for (var j = 0; j < SelectedNodeIndexes.Count; j++)
                                     {
@@ -3296,7 +3296,7 @@ namespace TrafficManager_ImprovedAI
 
                             GUILayout.EndHorizontal();
 
-                            if (GUILayout.Button("View", GUILayout.Width(45)))
+                            if (GUILayout.Button("閲覧", GUILayout.Width(45)))
                             {
                                 timedPanelAdd = false;
 
@@ -3307,7 +3307,7 @@ namespace TrafficManager_ImprovedAI
                                 }
                             }
 
-                            if (GUILayout.Button("Edit", GUILayout.Width(45)))
+                            if (GUILayout.Button("編集", GUILayout.Width(45)))
                             {
                                 timedPanelAdd = false;
                                 timedEditStep = i;
@@ -3322,7 +3322,7 @@ namespace TrafficManager_ImprovedAI
 
                             GUILayout.Space(20);
 
-                            if (GUILayout.Button("Delete", GUILayout.Width(60)))
+                            if (GUILayout.Button("削除", GUILayout.Width(60)))
                             {
                                 timedPanelAdd = false;
 
@@ -3337,9 +3337,9 @@ namespace TrafficManager_ImprovedAI
                 }
                 else
                 {
-                    GUILayout.Label("Time: " + (int)stepValue, GUILayout.Width(60));
+                    GUILayout.Label("時間: " + (int)stepValue, GUILayout.Width(60));
                     stepValue = GUILayout.HorizontalSlider(stepValue, 1f, 120f, GUILayout.Height(20));
-                    if (GUILayout.Button("Save", GUILayout.Width(45)))
+                    if (GUILayout.Button("保存", GUILayout.Width(45)))
                     {
                         for (var s = 0; s < SelectedNodeIndexes.Count; s++)
                         {
@@ -3361,9 +3361,9 @@ namespace TrafficManager_ImprovedAI
             {
                 if (timedPanelAdd)
                 {
-                    GUILayout.Label("Time: " + (int) stepValue, GUILayout.Width(60));
+                    GUILayout.Label("時間: " + (int) stepValue, GUILayout.Width(60));
                     stepValue = GUILayout.HorizontalSlider(stepValue, 1f, 120f, GUILayout.Height(20));
-                    if (GUILayout.Button("Add", GUILayout.Width(45)))
+                    if (GUILayout.Button("追加", GUILayout.Width(45)))
                     {
                         for (var i = 0; i < SelectedNodeIndexes.Count; i++)
                         {
@@ -3381,7 +3381,7 @@ namespace TrafficManager_ImprovedAI
                 {
                     if (timedEditStep < 0)
                     {
-                        if (GUILayout.Button("Add State"))
+                        if (GUILayout.Button("状態の追加"))
                         {
                             timedPanelAdd = true;
                         }
@@ -3397,12 +3397,12 @@ namespace TrafficManager_ImprovedAI
             {
                 if (nodeSimulation.TimedTrafficLightsActive)
                 {
-                    if (GUILayout.Button(timedShowNumbers ? "Hide counters" : "Show counters"))
+                    if (GUILayout.Button(timedShowNumbers ? "カウンターの非表示" : "カウンターの表示"))
                     {
                         timedShowNumbers = !timedShowNumbers;
                     }
 
-                    if (GUILayout.Button("Stop"))
+                    if (GUILayout.Button("停止"))
                     {
                         for (var i = 0; i < SelectedNodeIndexes.Count; i++)
                         {
@@ -3415,7 +3415,7 @@ namespace TrafficManager_ImprovedAI
                 {
                     if (timedEditStep < 0 && !timedPanelAdd)
                     {
-                        if (GUILayout.Button("Start"))
+                        if (GUILayout.Button("開始"))
                         {
                             timedPanelAdd = false;
 
@@ -3433,7 +3433,7 @@ namespace TrafficManager_ImprovedAI
 
             if (timedEditStep < 0)
             {
-                if (GUILayout.Button("REMOVE"))
+                if (GUILayout.Button("削除"))
                 {
                     DisableTimed();
                     SelectedNodeIndexes.Clear();
@@ -3647,7 +3647,7 @@ namespace TrafficManager_ImprovedAI
             {
                 if (TrafficLightsTimed.IsTimedLight(_hoveredNetNodeIdx))
                 {
-                    ShowToolInfo(true, "Node is part of timed script", node.m_position);
+                    ShowToolInfo(true, "この信号は時間設定がされています", node.m_position);
                 }
                 else
                 {

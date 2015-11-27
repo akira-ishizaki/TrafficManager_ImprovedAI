@@ -19,7 +19,7 @@ namespace TrafficManager_ImprovedAI
 
     public class ModBase : IUserMod
     {
-        public string Name { get { return "Traffic Manager + Improved AI"; } }
+        public string Name { get { return "Traffic Manager + Improved AI (Japanese Ver.)"; } }
 
         public string Description { get { return "TM lane changes, traffic lights and priority signs with improved AI from Traffic++."; } }
 	}
