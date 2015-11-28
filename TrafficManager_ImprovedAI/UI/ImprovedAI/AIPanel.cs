@@ -43,7 +43,7 @@ namespace TrafficManager_ImprovedAI
             minLaneSpace.MaxValue = CustomPathFind.MAX_MIN_LANE_SPACE;
             minLaneSpace.StepSize = 0.1f;
             minLaneSpace.Slider.scrollWheelAmount = 0.1f;
-            minLaneSpace.LabelText = "最低車間距離(経路の渋滞判定に使用)";
+            minLaneSpace.LabelText = "最低車線スペース(経路の渋滞判定に使用)";
             minLaneSpace.SliderValue = CustomPathFind.minLaneSpace;
 
             yVal += 56;
@@ -77,7 +77,7 @@ namespace TrafficManager_ImprovedAI
             lookaheadLanes.MaxValue = CustomPathFind.MAX_LOOKAHEAD_LANES;
             lookaheadLanes.StepSize = 1;
             lookaheadLanes.Slider.scrollWheelAmount = 1;
-            lookaheadLanes.LabelText = "現在経路の混雑度の算出にどのくらい先まで見るか";
+            lookaheadLanes.LabelText = "現在経路の渋滞度の算出にどのくらい先まで見るか";
             lookaheadLanes.SliderValue = CustomPathFind.lookaheadLanes;
 
             yVal += 56;
@@ -94,7 +94,7 @@ namespace TrafficManager_ImprovedAI
             congestedLaneThreshold.MaxValue = CustomPathFind.MAX_CONGESTED_LANE_THRESHOLD;
             congestedLaneThreshold.StepSize = 1;
             congestedLaneThreshold.Slider.scrollWheelAmount = 1;
-            congestedLaneThreshold.LabelText = "経路を再検索する混雑度の閾値";
+            congestedLaneThreshold.LabelText = "経路を再検索する渋滞度の閾値";
             congestedLaneThreshold.SliderValue = CustomPathFind.congestedLaneThreshold;
 
             yVal += 58;
