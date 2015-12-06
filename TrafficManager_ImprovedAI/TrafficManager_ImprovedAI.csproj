@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -21,7 +21,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -32,16 +32,20 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>C:\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ColossalManaged">
-      <HintPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
+      <HintPath>C:\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ICities">
-      <HintPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+      <HintPath>C:\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files %28x86%29\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -107,18 +111,7 @@
     <EmbeddedResource Include="Resources\sign_yield.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="PathFinding\" />
-    <Folder Include="AI\" />
-    <Folder Include="UI\" />
-    <Folder Include="UI\ImprovedAI\" />
-    <Folder Include="UI\TrafficManager\" />
-    <Folder Include="Utils\" />
-    <Folder Include="TrafficManager\" />
-    <Folder Include="Tools\" />
-    <Folder Include="CSL-Traffic\" />
-    <Folder Include="UI\CSL-Traffic\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="UI\CSL-Traffic\RoadCustomizerPanel.cs" />
     <None Include="UI\CSL-Traffic\RoadCustomizerGroupPanel.cs" />
