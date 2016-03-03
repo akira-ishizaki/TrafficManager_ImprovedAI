@@ -22,6 +22,17 @@ namespace TrafficManager_ImprovedAI
         public string Name { get { return "Traffic Manager + Improved AI (Japanese Ver.)"; } }
 
         public string Description { get { return "TM lane changes, traffic lights and priority signs with improved AI from Traffic++."; } }
+
+        public void OnSettingsUI(UIHelperBase helper)
+        {
+            UIHelperBase group = helper.AddGroup("Traffic Manager + Improved AI");
+            group.AddCheckbox("起動時にセーブデータを無視する", LoadingExtension.ignoreSavedData, delegate(bool c) { LoadingExtension.ignoreSavedData = c; });
+            /*
+            group.AddSpace(3);
+            group.AddGroup("起動時にエラーが出てゲームが正常にロードできないときに有効にしてください。");
+            group.AddGroup("注意: この設定は起動後に自動的に無効になります！");
+            */
+        }
 	}
   
 	public sealed class ThreadingExtension : ThreadingExtensionBase
@@ -62,7 +73,7 @@ namespace TrafficManager_ImprovedAI
                         new Type[] {
                             typeof(ushort), typeof(Vehicle).MakeByRefType(), typeof(PathUnit.Position),
                             typeof(PathUnit.Position), typeof(uint), typeof(byte), typeof(PathUnit.Position),
-                            typeof(uint), typeof(byte), typeof(Vector3).MakeByRefType(),
+                            typeof(uint), typeof(byte), typeof(int), typeof(Vector3).MakeByRefType(),
                             typeof(Vector3).MakeByRefType(), typeof(float).MakeByRefType()
                         },
                         null),
@@ -71,7 +82,7 @@ namespace TrafficManager_ImprovedAI
                         new Type[] {
                             typeof(ushort), typeof(Vehicle).MakeByRefType(), typeof(PathUnit.Position),
                             typeof(PathUnit.Position), typeof(uint), typeof(byte), typeof(PathUnit.Position),
-                            typeof(uint), typeof(byte), typeof(Vector3).MakeByRefType(),
+                            typeof(uint), typeof(byte), typeof(int), typeof(Vector3).MakeByRefType(),
                             typeof(Vector3).MakeByRefType(), typeof(float).MakeByRefType()
                         },
                         null));
@@ -104,13 +115,75 @@ namespace TrafficManager_ImprovedAI
 			{
 				LoadingExtension.Instance.UI.HideTMPanel();
 			}
-            */         
+            */
+
+            /*
+            if (Event.current.alt && Input.GetKeyDown(KeyCode.D)) {
+                var info = new RoadInfo();
+                var netManager = Singleton<NetManager>.instance;
+                Debug.Log("dumping road info for " + netManager.m_nodes.m_size + " nodes out of " + NetManager.MAX_NODE_COUNT);
+                var nodeCount = 0;
+                for (uint i = 0; i < netManager.m_nodes.m_size; i++) {
+                    var node = netManager.m_nodes.m_buffer[i];
+                    if (node.m_flags != 0 && node.Info.m_class.m_service == ItemClass.Service.Road) {
+                        var nodeInfo = new RoadInfo.Node();
+                        nodeInfo.id = i;
+                        nodeInfo.buildIndex = node.m_buildIndex;
+                        nodeInfo.segments[0] = node.m_segment0;
+                        nodeInfo.segments[1] = node.m_segment1;
+                        nodeInfo.segments[2] = node.m_segment2;
+                        nodeInfo.segments[3] = node.m_segment3;
+                        nodeInfo.segments[4] = node.m_segment4;
+                        nodeInfo.segments[5] = node.m_segment5;
+                        nodeInfo.segments[6] = node.m_segment6;
+                        nodeInfo.segments[7] = node.m_segment7;
+                        info.nodes.Add(nodeInfo);
+                        nodeCount++;
+                    }
+                }
+                Debug.Log("found " + nodeCount + " nodes");
+                RoadInfo.DumpRoadInfo(info);
+            }
+            */
 		}
 	}
+
+    public class RoadInfo
+    {
+        [Serializable]
+        public class Node
+        {
+            public uint id;
+            public uint buildIndex;
+            public uint[] segments = new uint[8];
+        }
+        /*
+        [Serializable]
+        public class Segment
+        {
+            public uint id;
+            public uint buildIndex;
+        }
+        */
+        public List<Node> nodes = new List<Node>();
+        //public List<Segment> segments = new List<Segment>();
+
+        public static void DumpRoadInfo(RoadInfo info)
+        {
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(RoadInfo));
+            var filepath = System.IO.Path.Combine(Application.dataPath, "roadinfo_" + (uint) UnityEngine.Random.Range(1000000f, 2000000f));
+
+            using (var writer = new System.IO.StreamWriter(filepath)) {
+                serializer.Serialize(writer, info);
+            }
+        }
+    }
 		
 	public sealed class LoadingExtension : LoadingExtensionBase
 	{		
 		public static LoadingExtension Instance = null;
+
+        public static bool ignoreSavedData = false;
 
         public static bool roadManagerInitialized = false;
 
@@ -186,6 +259,9 @@ namespace TrafficManager_ImprovedAI
 			TrafficLightsTimed.timedScripts.Clear();
 			LoadingExtension.Instance.nodeSimulationLoaded = false;
             SerializableDataExtension.configLoaded = false;
+            CSL_Traffic.RoadCustomizerTool customizerTool = ToolsModifierControl.GetTool<CSL_Traffic.RoadCustomizerTool>();
+            customizerTool.ClearNodeMarkers();
+            CSL_Traffic.RoadManager.sm_lanes = new CSL_Traffic.RoadManager.Lane[NetManager.MAX_LANE_COUNT];
             roadManagerInitialized = false;
             //ToolsModifierControl.SetTool<DefaultTool>();
 		}

@@ -707,7 +707,7 @@ namespace TrafficManager_ImprovedAI
                                     {
                                         
                                     }
-                                    ShowToolInfo(true, "この信号は時間設定がされています", node.m_position);
+                                    ShowToolInfo(true, "この交差点には時間設定付き信号があります", node.m_position);
                                 }
                             }
                         }
@@ -742,7 +742,7 @@ namespace TrafficManager_ImprovedAI
                                 }
                                 else
                                 {
-                                    ShowToolInfo(true, "この信号は時間設定がされています", node.m_position);
+                                    ShowToolInfo(true, "この交差点には時間設定付き信号があります", node.m_position);
                                 }
                             }
                         }
@@ -897,7 +897,7 @@ namespace TrafficManager_ImprovedAI
             return nodeid != 0 && (node.m_flags & (NetNode.Flags.Transition | NetNode.Flags.TrafficLights)) == NetNode.Flags.None;
         }
 
-        protected override void OnToolGUI()
+        protected override void OnToolGUI(Event e)
         {
             if (!Input.GetMouseButtonDown(0))
             {
@@ -1544,7 +1544,7 @@ namespace TrafficManager_ImprovedAI
 
         protected void _guiTimedTrafficLights()
         {
-            GUILayout.Window(253, _windowRect, _guiTimedControlPanel, "信号の時間設定");
+            GUILayout.Window(253, _windowRect, _guiTimedControlPanel, "時間設定付き信号の管理");
 
             if (_windowRect.Contains(Event.current.mousePosition))
             {
@@ -3240,7 +3240,7 @@ namespace TrafficManager_ImprovedAI
                             GUILayout.Label("状態[" + (i + 1) + "]: " + timedNodeMain.GetStep(i).currentStep(), layout_green);
                             GUILayout.Space(5);
                             GUILayout.EndVertical();
-                            if (GUILayout.Button("スキップ", GUILayout.Width(90)))
+                            if (GUILayout.Button("次へ", GUILayout.Width(45)))
                             {
                                 for (var j = 0; j < SelectedNodeIndexes.Count; j++)
                                 {
@@ -3296,7 +3296,7 @@ namespace TrafficManager_ImprovedAI
 
                             GUILayout.EndHorizontal();
 
-                            if (GUILayout.Button("閲覧", GUILayout.Width(45)))
+                            if (GUILayout.Button("表示", GUILayout.Width(45)))
                             {
                                 timedPanelAdd = false;
 
@@ -3647,7 +3647,7 @@ namespace TrafficManager_ImprovedAI
             {
                 if (TrafficLightsTimed.IsTimedLight(_hoveredNetNodeIdx))
                 {
-                    ShowToolInfo(true, "この信号は時間設定がされています", node.m_position);
+                    ShowToolInfo(true, "この交差点には時間設定付き信号があります", node.m_position);
                 }
                 else
                 {

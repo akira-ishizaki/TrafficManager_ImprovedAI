@@ -75,10 +75,10 @@ namespace TrafficManager_ImprovedAI
             buttonSwitchTraffic = _createButton("信号の付け外し", new Vector3(35f, 30f), clickSwitchTraffic);
             buttonPrioritySigns = _createButton("優先関係標識の追加", new Vector3(35f, 70f), clickAddPrioritySigns);
             buttonManualControl = _createButton("信号の手動切替", new Vector3(35f, 110f), clickManualControl);
-            buttonTimedMain = _createButton("信号の時間設定", new Vector3(35f, 150f), clickTimedAdd);
-            buttonLaneChange = _createButton("右左折車線の設定", new Vector3(35f, 190f), clickChangeLanes);
+            buttonTimedMain = _createButton("時間設定付き信号", new Vector3(35f, 150f), clickTimedAdd);
+            buttonLaneChange = _createButton("車線矢印の変更", new Vector3(35f, 190f), clickChangeLanes);
             buttonCrosswalk = _createButton("横断歩道の付け外し", new Vector3(35f, 230f), clickCrosswalk);
-            buttonClearTraffic = _createButton("移動中の車の除去", new Vector3(35f, 270f), clickClearTraffic);
+            buttonClearTraffic = _createButton("移動中車両の除去", new Vector3(35f, 270f), clickClearTraffic);
             buttonToggleDespawn = _createButton(LoadingExtension.Instance.despawnEnabled ? "スタック除去無効化" : "スタック除去有効化", new Vector3(35f, 310f), clickToggleDespawn);
         }
 

@@ -111,7 +111,18 @@
     <EmbeddedResource Include="Resources\sign_yield.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PathFinding\" />
+    <Folder Include="AI\" />
+    <Folder Include="UI\" />
+    <Folder Include="UI\ImprovedAI\" />
+    <Folder Include="UI\TrafficManager\" />
+    <Folder Include="Utils\" />
+    <Folder Include="TrafficManager\" />
+    <Folder Include="Tools\" />
+    <Folder Include="CSL-Traffic\" />
+    <Folder Include="UI\CSL-Traffic\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="UI\CSL-Traffic\RoadCustomizerPanel.cs" />
     <None Include="UI\CSL-Traffic\RoadCustomizerGroupPanel.cs" />
