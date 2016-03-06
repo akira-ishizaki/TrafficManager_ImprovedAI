@@ -111,22 +111,16 @@
     <EmbeddedResource Include="Resources\sign_yield.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="PathFinding\" />
-    <Folder Include="AI\" />
-    <Folder Include="UI\" />
-    <Folder Include="UI\ImprovedAI\" />
-    <Folder Include="UI\TrafficManager\" />
-    <Folder Include="Utils\" />
-    <Folder Include="TrafficManager\" />
-    <Folder Include="Tools\" />
-    <Folder Include="CSL-Traffic\" />
-    <Folder Include="UI\CSL-Traffic\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="UI\CSL-Traffic\RoadCustomizerPanel.cs" />
     <None Include="UI\CSL-Traffic\RoadCustomizerGroupPanel.cs" />
     <None Include="UI\CSL-Traffic\UIUtils.cs" />
     <None Include="CSL-Traffic\FileManager.cs" />
   </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"
+del "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\$(TargetFileName)"
+xcopy /y "$(TargetPath)" "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
